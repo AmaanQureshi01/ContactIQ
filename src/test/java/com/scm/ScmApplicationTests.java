@@ -5,6 +5,7 @@ import com.scm.services.EmailService;
 import com.scm.services.UserServices;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -15,6 +16,8 @@ import java.io.InputStream;
 @SpringBootTest
 class ScmApplicationTests {
 
+    @Value("${MAIL_TO}")
+    private String to;
     @Test
     void contextLoads() {
     }
@@ -27,7 +30,7 @@ class ScmApplicationTests {
     @Test
     void sendEmailTest(){
         emailService.sendEmail(
-                "mohdamaanqureshi01@gmail.com",
+                to,
                 "just testing email service",
                 "This is scm project working on email service"
         );
@@ -39,7 +42,7 @@ class ScmApplicationTests {
         String html=""+"<h1 style='color:red; border:2px solid blue;'>Hello IT is HTML Testing CASe 1</h1>";
 
         emailService.sendEmailWithHtml(
-                "mohdamaanqureshi01@gmail.com",
+                to,
                 "Email For HTML Testing",
                 html
         );
@@ -50,7 +53,7 @@ class ScmApplicationTests {
     void sendAttaachment(){
 
         emailService.sendEmailWithAttachment(
-                "mohdamaanqureshi01@gmail.com",
+                to,
                 "Email with Attachment",
                 "testing email with attachment case - 1",
                 new File("D:\\Codes\\Projects\\scm\\src\\main\\resources\\static\\image\\default-avatar.png")
@@ -63,7 +66,7 @@ class ScmApplicationTests {
         try {
             InputStream is = new FileInputStream(file);
             emailService.sendEmailwithFile(
-                    "mohdamaanqureshi01@gmail.com",
+                    to,
                     "Email with file",
                     "testing email with file case - 1",
                     is
