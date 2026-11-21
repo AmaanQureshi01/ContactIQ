@@ -1,6 +1,6 @@
 # ContactIQ — Smart Cloud Contact Manager
 
-**ContactIQ** is a full-stack cloud contact management web application built with **Spring Boot**, **Spring Security**, **OAuth2**, **Thymeleaf**, **Tailwind CSS**, and **MySQL**. It enables users to securely store, organize, search, and export personal and professional contacts from a clean, responsive dashboard.
+**ContactIQ** is a full-stack cloud contact management web application built with **Spring Boot**, **Spring Security**, **OAuth2**, **Thymeleaf**, **Tailwind CSS**, and **SQL Server**. It enables users to securely store, organize, search, and export personal and professional contacts from a clean, responsive dashboard.
 
 ---
 
@@ -33,7 +33,7 @@
 | **Backend** | Java, Spring Boot, Spring MVC, Spring Data JPA / Hibernate |
 | **Security** | Spring Security, OAuth2 Client (Google & GitHub), BCrypt |
 | **Frontend** | Thymeleaf, Tailwind CSS, Flowbite, Vanilla JavaScript, Inline SVGs |
-| **Database** | MySQL |
+| **Database** | SQL Server |
 | **Cloud & Integrations** | Cloudinary (Image Upload), JavaMailSender / SMTP (OTP & Contact Emails) |
 | **Build Tool** | Maven |
 
@@ -75,10 +75,10 @@ cd ContactIQ
 ```
 
 ### 3. Configure Environment Variables
-Create a MySQL database named `scm` (or configure your own URL), then set the following environment variables in your OS or IDE Run Configuration:
+Create a SQL Server/MySQL database named `scm` (or configure your own URL), then set the following environment variables in your OS or IDE Run Configuration:
 
 ```env
-DB_URL=jdbc:mysql://localhost:3306/scm
+DB_URL=jdbc:sqlserver://localhost:1433;databaseName=SmartContactManager;encrypt=true;trustServerCertificate=true
 DB_USERNAME=root
 DB_PASSWORD=your_mysql_password
 
