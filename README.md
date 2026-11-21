@@ -78,7 +78,7 @@ cd ContactIQ
 Create a SQL Server/MySQL database named `scm` (or configure your own URL), then set the following environment variables in your OS or IDE Run Configuration:
 
 ```env
-DB_URL=jdbc:mysql://localhost:3306/scm
+DB_URL=jdbc:sqlserver://localhost:1433;databaseName=SmartContactManager;encrypt=true;trustServerCertificate=true
 DB_USERNAME=root
 DB_PASSWORD=your_mysql_password
 
