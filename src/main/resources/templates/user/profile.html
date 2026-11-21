@@ -1,0 +1,219 @@
+ <!DOCTYPE html>
+<html lang="en" th:replace="~{user/user_base :: parent(~{::section},~{::title})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${loggedInUser.name} +' | Profile'"></title>
+</head>
+<body>
+<section class="text-center">
+    <div class="max-w-3xl mx-auto p-4 sm:p-6">
+        <div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-sm overflow-hidden">
+
+            <!-- Top Banner -->
+            <div class="h-28 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-slate-700 dark:to-slate-900 text-center px-7"></div>
+
+            <div class="px-6 pb-6">
+                <!-- Avatar & Edit Button -->
+                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between -mt-12 mb-6 gap-4">
+                    <div class="relative inline-block">
+                        <img
+                                th:src="${user.profilePicture != null && !user.profilePicture.isEmpty() ? user.profilePicture : '/images/default-avatar.png'}"
+                                alt="Profile Picture"
+                                class="w-24 h-24 rounded-full object-cover border-4 border-white dark:border-slate-800 shadow-md bg-gray-100"
+                        >
+                    </div>
+
+                    <!-- Show Edit Button only in View Mode -->
+                    <a
+                            th:if="${!editMode}"
+                            th:href="@{'/user/profile'(edit=true)}"
+                            class="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 dark:bg-slate-600 dark:hover:bg-slate-500 rounded-lg transition self-start sm:self-auto"
+                    >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
+                        </svg>
+                        Edit Profile
+                    </a>
+                </div>
+
+                <!-- ================= VIEW MODE (editMode == false) ================= -->
+                <div th:if="${!editMode}" class="space-y-6">
+                    <div>
+                        <h2 th:text="${user.name}" class="text-2xl font-bold text-gray-900 dark:text-white">User Name</h2>
+                        <p
+                                th:text="${user.about != null && !user.about.isEmpty() ? user.about : 'No description added yet.'}"
+                                class="mt-2 text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
+                        >
+                            About user...
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-gray-200 dark:border-slate-700">
+                        <!-- Email -->
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-blue-50 dark:bg-slate-700 rounded-lg text-blue-600 dark:text-blue-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Email Address</p>
+                                <p th:text="${user.email}" class="text-sm font-medium text-gray-900 dark:text-white mt-0.5">user@example.com</p>
+                            </div>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-blue-50 dark:bg-slate-700 rounded-lg text-blue-600 dark:text-blue-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Phone Number</p>
+                                <p
+                                        th:text="${user.phoneNumber != null && !user.phoneNumber.isEmpty() ? user.phoneNumber : 'Not provided'}"
+                                        class="text-sm font-medium text-gray-900 dark:text-white mt-0.5"
+                                >
+                                    +91 00000 00000
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= EDIT MODE (editMode == true) ================= -->
+                <form
+                        th:if="${editMode}"
+                        th:action="@{'/user/profile/update'}"
+                        th:object="${user}"
+                        method="post"
+                        enctype="multipart/form-data"
+                        class="space-y-5"
+                >
+                    <div th:replace="~{message :: messageBox}"></div>
+                    <!-- Profile Picture File Upload -->
+                    <div>
+                        <label for="profileImageFile" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Update Profile Picture
+                        </label>
+                        <input
+                                id="profileImageFile"
+                                name="profileImageFile"
+                                type="file"
+                                accept="image/*"
+                                class="block w-full text-sm text-gray-700 dark:text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-slate-700 dark:file:text-gray-200 cursor-pointer"
+                        >
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Name (nullable = false) -->
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
+                            <input
+                                    id="name"
+                                    th:field="*{name}"
+                                    type="text"
+                                    required
+                                    class="w-full h-10 px-3 text-sm bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                            >
+                        </div>
+
+                        <!-- Phone Number (length = 15) -->
+                        <div>
+                            <label for="phoneNumber" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
+                            <input
+                                    id="phoneNumber"
+                                    th:field="*{phoneNumber}"
+                                    type="tel"
+                                    maxlength="15"
+                                    class="w-full h-10 px-3 text-sm bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Email (unique = true, nullable = false) -->
+<!--                    <div>-->
+<!--                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>-->
+<!--                        <input-->
+<!--                                id="email"-->
+<!--                                th:field="*{email}"-->
+<!--                                type="email"-->
+<!--                                required-->
+<!--                                class="w-full h-10 px-3 text-sm bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"-->
+<!--                        >-->
+<!--                    </div>-->
+
+                    <!-- About / Description (length = 1000) -->
+                    <div>
+                        <label for="about" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">About</label>
+                        <textarea
+                                id="about"
+                                th:field="*{about}"
+                                rows="3"
+                                maxlength="1000"
+                                class="w-full p-3 text-sm bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                        ></textarea>
+                    </div>
+                    <!-- ================= OPTIONAL PASSWORD CHANGE (Only for local accounts) ================= -->
+                    <div th:if="${user.password != null}" class="pt-4 border-t border-gray-200 dark:border-slate-700 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Change Password</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">Leave blank if you do not want to change your password.</p>
+                            </div>
+                            <a th:href="@{'/forgot-password'}" class="text-xs font-medium text-blue-600 hover:underline dark:text-blue-400">
+                                Forgot Password?
+                            </a>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="oldPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Current Password</label>
+                                <input
+                                        id="oldPassword"
+                                        name="oldPassword"
+                                        type="password"
+                                        placeholder="Enter current password"
+                                        class="w-full h-10 px-3 text-sm bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                                >
+                            </div>
+
+                            <div>
+                                <label for="newPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">New Password</label>
+                                <input
+                                        id="newPassword"
+                                        name="newPassword"
+                                        type="password"
+                                        minlength="6"
+                                        placeholder="Enter new password"
+                                        class="w-full h-10 px-3 text-sm bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cancel & Save Buttons -->
+                    <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-200 dark:border-slate-700">
+                        <a
+                                th:href="@{'/user/profile'}"
+                                class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 hover:bg-gray-200 dark:bg-slate-700 dark:hover:bg-slate-600 rounded-lg transition"
+                        >
+                            Cancel
+                        </a>
+                        <button
+                                type="submit"
+                                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition cursor-pointer"
+                        >
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

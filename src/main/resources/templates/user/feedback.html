@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{user/user_base :: parent(~{::#content}, ~{::title})}">
+<head>
+    <title th:text="${loggedInUser.name} + ' | Feedback'">Feedback</title>
+</head>
+<body>
+<div id="content">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- Header Banner -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-2.5">
+                    <i class="fa-solid fa-comment-dots text-blue-600 dark:text-blue-400"></i>
+                    Send Feedback
+                </h1>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    Have a suggestion, found a bug, or want to share your experience with ContactIQ? Let us know!
+                </p>
+            </div>
+            <a
+                    data-th-href="@{'/user/dashboard'}"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition self-start sm:self-auto"
+            >
+                <i class="fa-solid fa-arrow-left mr-2"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <!-- Flash Success Alert -->
+        <div
+                th:if="${feedbackSuccess}"
+                class="mb-6 p-4 rounded-xl bg-green-50 dark:bg-green-900/40 border border-green-200 dark:border-green-700 text-green-800 dark:text-green-300 flex items-center justify-between"
+        >
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-lg"></i>
+                <span class="text-sm font-medium" th:text="${feedbackSuccess}">Thank you! Your feedback has been submitted.</span>
+            </div>
+        </div>
+
+        <!-- Main 2-Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Left Column: Feedback Form (2/3 Width) -->
+            <div class="lg:col-span-2 bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+                <form
+                        data-th-action="@{'/user/feedback'}"
+                        data-th-object="${feedbackForm}"
+                        method="post"
+                        class="space-y-6"
+                        novalidate
+                >
+                    <!-- Interactive Star Rating -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+                            How would you rate your experience?
+                        </label>
+                        <input type="hidden" id="ratingInput" th:field="*{rating}" />
+                        <div class="flex items-center gap-2" id="starContainer">
+                            <button type="button" data-value="1" class="star-btn text-2xl text-yellow-400 hover:scale-110 transition focus:outline-none">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <button type="button" data-value="2" class="star-btn text-2xl text-yellow-400 hover:scale-110 transition focus:outline-none">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <button type="button" data-value="3" class="star-btn text-2xl text-yellow-400 hover:scale-110 transition focus:outline-none">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <button type="button" data-value="4" class="star-btn text-2xl text-yellow-400 hover:scale-110 transition focus:outline-none">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <button type="button" data-value="5" class="star-btn text-2xl text-yellow-400 hover:scale-110 transition focus:outline-none">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <span id="ratingLabel" class="ml-2 text-xs font-medium text-gray-500 dark:text-gray-400">Excellent (5/5)</span>
+                        </div>
+                        <p th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" class="text-xs text-red-500 mt-1"></p>
+                    </div>
+
+                    <!-- Category & Subject Row -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="category" class="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1.5">
+                                Category
+                            </label>
+                            <select
+                                    id="category"
+                                    th:field="*{category}"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            >
+                                <option value="General Feedback">General Feedback</option>
+                                <option value="Feature Request">Feature Request</option>
+                                <option value="Bug Report">Bug Report</option>
+                                <option value="UI / Design">UI / Design</option>
+                            </select>
+                            <p th:if="${#fields.hasErrors('category')}" th:errors="*{category}" class="text-xs text-red-500 mt-1"></p>
+                        </div>
+
+                        <div>
+                            <label for="subject" class="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1.5">
+                                Subject
+                            </label>
+                            <input
+                                    type="text"
+                                    id="subject"
+                                    th:field="*{subject}"
+                                    placeholder="e.g., Export contacts to vCard"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            />
+                            <p th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="text-xs text-red-500 mt-1"></p>
+                        </div>
+                    </div>
+
+                    <!-- Message Textarea -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1.5">
+                            <label for="message" class="block text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                Your Message
+                            </label>
+                            <span id="charCount" class="text-xs text-gray-400">0 / 2000</span>
+                        </div>
+                        <textarea
+                                id="message"
+                                rows="5"
+                                maxlength="2000"
+                                th:field="*{message}"
+                                placeholder="Describe your idea, issue, or feedback in detail..."
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                        ></textarea>
+                        <p th:if="${#fields.hasErrors('message')}" th:errors="*{message}" class="text-xs text-red-500 mt-1"></p>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex items-center justify-end gap-3 pt-2">
+                        <button
+                                type="reset"
+                                class="px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition"
+                        >
+                            Clear
+                        </button>
+                        <button
+                                type="submit"
+                                class="inline-flex items-center px-6 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition"
+                        >
+                            <i class="fa-solid fa-paper-plane mr-2"></i> Submit Feedback
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Column: User Info & Past Feedback History (1/3 Width) -->
+            <div class="space-y-6">
+                <!-- Submitting As Card -->
+                <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Submitting As</p>
+                    <div class="flex items-center gap-3">
+                        <img
+                                th:src="${loggedInUser.profilePicture != null && !loggedInUser.profilePicture.isEmpty()} ? ${loggedInUser.profilePicture} : 'https://as1.ftcdn.net/v2/jpg/00/64/67/52/1000_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.jpg'"
+                                style="width: 42px; height: 42px; min-width: 42px;"
+                                class="w-10 h-10 rounded-full object-cover border border-gray-300 dark:border-gray-600"
+                                alt="Avatar"
+                        />
+                        <div class="min-w-0">
+                            <p class="text-sm font-bold text-gray-900 dark:text-white truncate" th:text="${loggedInUser.name}">User</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 truncate" th:text="${loggedInUser.email}">email@example.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Previous Feedback History -->
+                <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+                    <h2 class="text-base font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-clock-rotate-left text-blue-500"></i> Your Past Feedback
+                    </h2>
+
+                    <div th:if="${#lists.isEmpty(previousFeedbacks)}" class="text-center py-6 text-xs text-gray-500 dark:text-gray-400">
+                        You haven't submitted any feedback yet.
+                    </div>
+
+                    <div th:unless="${#lists.isEmpty(previousFeedbacks)}" class="space-y-3 max-h-96 overflow-y-auto pr-1">
+                        <div
+                                th:each="fb : ${previousFeedbacks}"
+                                class="p-3.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/40"
+                        >
+                            <div class="flex items-center justify-between gap-2 mb-1">
+        <span class="px-2 py-0.5 text-[11px] font-semibold rounded bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300" th:text="${fb.category}">
+            Category
+        </span>
+
+                                <div class="flex items-center gap-2">
+            <span class="inline-flex items-center gap-1 text-xs text-yellow-400 font-semibold">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                <span th:text="${fb.rating} + '/5'">5/5</span>
+            </span>
+
+                                    <!-- Delete Feedback Form Button -->
+                                    <form
+                                            th:id="'delete-fb-' + ${fb.id}"
+                                            th:action="@{'/user/feedback/delete/' + ${fb.id}}"
+                                            method="post"
+                                            class="inline"
+                                    >
+                                        <button
+                                                type="button"
+                                                th:data-id="${fb.id}"
+                                                onclick="confirmDeleteFeedback(this.getAttribute('data-id'))"
+                                                class="p-1 text-gray-400 hover:text-red-600 dark:hover:text-red-400 rounded transition"
+                                                title="Delete Feedback"
+                                                aria-label="Delete Feedback"
+                                        >
+                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <p class="text-sm font-semibold text-gray-900 dark:text-white" th:text="${fb.subject}">Subject</p>
+                            <p class="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2" th:text="${fb.message}">Message preview...</p>
+                            <p class="text-[11px] text-gray-400 mt-2" th:text="${#temporals.format(fb.submittedAt, 'dd MMM yyyy, hh:mm a')}">Date</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Interactive Star Rating & Character Counter Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const stars = document.querySelectorAll(".star-btn");
+            const ratingInput = document.getElementById("ratingInput");
+            const ratingLabel = document.getElementById("ratingLabel");
+            const labels = {
+                1: "Poor (1/5)",
+                2: "Fair (2/5)",
+                3: "Good (3/5)",
+                4: "Very Good (4/5)",
+                5: "Excellent (5/5)"
+            };
+
+            function renderStars(val) {
+                stars.forEach(star => {
+                    const sVal = parseInt(star.getAttribute("data-value"));
+                    if (sVal <= val) {
+                        star.classList.remove("text-gray-300", "dark:text-gray-600");
+                        star.classList.add("text-yellow-400");
+                    } else {
+                        star.classList.remove("text-yellow-400");
+                        star.classList.add("text-gray-300", "dark:text-gray-600");
+                    }
+                });
+                if (ratingLabel) ratingLabel.textContent = labels[val] || "";
+            }
+
+            const initialVal = parseInt(ratingInput?.value) || 5;
+            renderStars(initialVal);
+
+            stars.forEach(star => {
+                star.addEventListener("click", () => {
+                    const val = parseInt(star.getAttribute("data-value"));
+                    ratingInput.value = val;
+                    renderStars(val);
+                });
+            });
+
+            const msgBox = document.getElementById("message");
+            const charCount = document.getElementById("charCount");
+            if (msgBox && charCount) {
+                charCount.textContent = `${msgBox.value.length} / 2000`;
+                msgBox.addEventListener("input", () => {
+                    charCount.textContent = `${msgBox.value.length} / 2000`;
+                });
+            }
+        });
+
+        function confirmDeleteFeedback(feedbackId) {
+            Swal.fire({
+                title: "Delete this feedback?",
+                text: "This action cannot be undone.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#dc2626",
+                cancelButtonColor: "#6b7280",
+                confirmButtonText: "Yes, delete it"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById("delete-fb-" + feedbackId).submit();
+                }
+            });
+        }
+    </script>
+</div>
+</body>
+</html>

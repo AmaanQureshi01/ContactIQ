@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::section},~{::title})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | ContactIQ</title>
+</head>
+<body>
+<section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+
+    <!-- 1. SIMPLE CENTERED HERO SECTION -->
+    <div class="text-center max-w-2xl mx-auto">
+        <!-- App Icon Badge -->
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-50 dark:bg-slate-900 border border-blue-100 dark:border-slate-800 text-blue-600 dark:text-cyan-400 mb-6">
+            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+            </svg>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
+            All your contacts, safe in one place.
+        </h1>
+
+        <p class="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+            ContactIQ helps you save, search, and organize your personal and work contacts effortlessly—accessible anytime on any device.
+        </p>
+
+        <!-- Two Clear Action Buttons -->
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a th:href="@{'/signup'}"
+               class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 dark:bg-cyan-500 dark:hover:bg-cyan-600 dark:text-slate-950 rounded-xl transition">
+                <span>Create Free Account</span>
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+            </a>
+
+            <a th:href="@{'/login'}"
+               class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition">
+                <span>Sign In</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 2. THREE EASY FEATURE CARDS -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Card 1: Easy Storage -->
+        <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-cyan-400 flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                </svg>
+            </div>
+            <h2 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">Save Complete Details</h2>
+            <p class="text-sm text-slate-600 dark:text-slate-400">
+                Keep phone numbers, emails, photos, addresses, and LinkedIn profiles neatly organized.
+            </p>
+        </div>
+
+        <!-- Card 2: Fast Search -->
+        <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+            </div>
+            <h2 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">Find Anyone Fast</h2>
+            <p class="text-sm text-slate-600 dark:text-slate-400">
+                Search instantly by name, email, or phone number, or pin your favorite contacts on top.
+            </p>
+        </div>
+
+        <!-- Card 3: Safe & Secure -->
+        <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <div class="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                </svg>
+            </div>
+            <h2 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">Private &amp; Secure</h2>
+            <p class="text-sm text-slate-600 dark:text-slate-400">
+                Sign in with Google, GitHub, or email verification—your contacts stay private to your account.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- 3. SIMPLE HOW-IT-WORKS BAR -->
+    <div class="mt-12 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">New to ContactIQ?</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                Sign up in seconds and start adding or exporting your contacts right away.
+            </p>
+        </div>
+        <a th:href="@{'/signup'}"
+           class="w-full sm:w-auto text-center px-5 py-2.5 text-sm font-semibold text-blue-600 dark:text-cyan-400 bg-blue-50 dark:bg-slate-800 hover:bg-blue-100 dark:hover:bg-slate-700 rounded-xl transition flex-shrink-0">
+            Get Started &rarr;
+        </a>
+    </div>
+
+    <!-- 4. MINIMAL FOOTER -->
+    <footer class="mt-16 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+        <p>&copy; 2026 ContactIQ. All rights reserved.</p>
+        <div class="flex items-center gap-5">
+            <a th:href="@{'/about'}" class="hover:text-slate-900 dark:hover:text-white transition">About</a>
+            <a th:href="@{'/services'}" class="hover:text-slate-900 dark:hover:text-white transition">Services</a>
+            <a th:href="@{'/contact'}" class="hover:text-slate-900 dark:hover:text-white transition">Contact</a>
+        </div>
+    </footer>
+
+</section>
+</body>
+</html>

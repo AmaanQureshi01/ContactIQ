@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::section},~{::title})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | ContactIQ</title>
+</head>
+<body>
+<section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+
+    <!-- 1. PAGE HEADER -->
+    <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-slate-900 dark:text-cyan-400 dark:border-slate-800 mb-4">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+            </svg>
+            <span>About the Project</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Why I Built <span class="text-blue-600 dark:text-cyan-400">ContactIQ</span>
+        </h1>
+
+        <p class="mt-4 text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+            ContactIQ is a full-stack cloud contact management web application designed to keep personal and professional connections organized, searchable, and secure.
+        </p>
+    </div>
+
+    <!-- 2. DEVELOPER PROFILE CARD -->
+    <div class="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 mb-10 shadow-sm">
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+            <!-- Developer Avatar Initials -->
+            <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white font-extrabold text-2xl flex items-center justify-center flex-shrink-0 shadow-md">
+                AQ
+            </div>
+
+            <div class="flex-1 text-center sm:text-left">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+                            Amaan Qureshi
+                        </h2>
+                        <p class="text-sm font-medium text-blue-600 dark:text-cyan-400">
+                            Full Stack Java Developer
+                        </p>
+                    </div>
+
+                    <!-- Social Links (LinkedIn & GitHub) -->
+                    <div class="flex items-center justify-center sm:justify-end gap-3 mt-2 sm:mt-0">
+                        <a href="https://www.linkedin.com/in/amaan-qureshi-01sep2003"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-cyan-400 rounded-xl transition">
+                            <svg class="w-4 h-4 text-blue-600 dark:text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                            </svg>
+                            <span>LinkedIn</span>
+                        </a>
+
+                        <a href="https://github.com/AmaanQureshi01"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-cyan-400 rounded-xl transition">
+                            <svg class="w-4 h-4 text-slate-800 dark:text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
+                            </svg>
+                            <span>GitHub</span>
+                        </a>
+                    </div>
+                </div>
+
+                <p class="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                    I am a college student building practical, end-to-end web applications to master Spring Boot, Spring Security, OAuth2 authentication, email OTP verification, and modern full-stack development.
+                </p>
+
+                <!-- Tech Stack Badges -->
+                <div class="mt-5">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5">Tech Stack Used</p>
+                    <div class="flex flex-wrap justify-center sm:justify-start gap-2">
+                        <span class="px-3 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Java</span>
+                        <span class="px-3 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Spring Boot</span>
+                        <span class="px-3 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Spring Security</span>
+                        <span class="px-3 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">OAuth2</span>
+                        <span class="px-3 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Thymeleaf</span>
+                        <span class="px-3 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Tailwind CSS</span>
+                        <span class="px-3 py-1 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">MySQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. WHAT THIS PROJECT COVERS (2-COLUMN HIGHLIGHTS) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <!-- Engineering Focus -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-cyan-400 flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                </svg>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Learning &amp; Architecture</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Built from scratch to practice real-world backend patterns: role-based access control, BCrypt password hashing, Google &amp; GitHub OAuth2 login, SMTP OTP verification, and clean MVC separation.
+            </p>
+        </div>
+
+        <!-- User Experience -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" />
+                </svg>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">User-Friendly Design</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Designed with responsive Tailwind CSS layouts, persistent Light &amp; Dark themes, instant multi-field search, favorite contact pinning, and one-click Excel export.
+            </p>
+        </div>
+    </div>
+
+    <!-- 4. BOTTOM CTA -->
+    <div class="text-center p-6 sm:p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Want to try ContactIQ?</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-5">
+            Create an account to test the dashboard, contact search, and cloud features.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+            <a th:href="@{'/signup'}"
+               class="px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 dark:bg-cyan-500 dark:hover:bg-cyan-600 dark:text-slate-950 rounded-xl transition">
+                Get Started
+            </a>
+            <a th:href="@{'/home'}"
+               class="px-5 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition">
+                Back to Home
+            </a>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

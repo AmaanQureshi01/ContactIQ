@@ -1,0 +1,115 @@
+<div th:fragment="contact_view">
+    <!-- Modal Backdrop Container (Hidden by default) -->
+    <div id="view_contact_modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xs hidden p-4">
+
+        <!-- Modal Card -->
+        <div class="relative w-full max-w-lg bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700 animate-fadeIn">
+
+            <!-- Top Close "X" Button -->
+            <button onclick="closeContactModal()" type="button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 dark:hover:text-white bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg p-1.5 inline-flex items-center justify-center transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+
+            <!-- Header: Avatar, Name, Email, Phone -->
+            <div class="flex flex-col items-center pt-8 pb-6 px-6 text-center">
+                <!-- Top Profile Info -->
+                <img id="contact_image" src="" alt="Contact Avatar" class="w-24 h-24 rounded-full object-cover shadow-md border-2 border-gray-200 dark:border-gray-600 mb-3" />
+                <h3 id="contact_name" class="text-xl font-bold text-gray-900 dark:text-white"></h3>
+
+                <!-- Email Row -->
+                <div class="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    <svg class="w-4 h-4 text-gray-400 dark:text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <span id="contact_email"></span>
+                </div>
+
+                <!-- Phone Row -->
+                <div class="flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 mt-1">
+                    <svg class="w-4 h-4 text-gray-400 dark:text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                    <span id="contact_phone"></span>
+                </div>
+            </div>
+
+            <hr class="border-gray-200 dark:border-gray-700">
+
+            <!-- Table / Key-Value Details Section -->
+            <div class="divide-y divide-gray-100 dark:divide-gray-700 text-sm">
+
+                <!-- Address -->
+                <div class="grid grid-cols-12 py-3.5 px-8 items-center hover:bg-gray-50 dark:hover:bg-gray-700/40 transition">
+                    <div class="col-span-2 text-gray-400 dark:text-gray-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6-5.686-6-10a6 6 0 1112 0c0 4.314-6 10-6 10z"/>
+                            <circle cx="12" cy="11" r="2.5" fill="none"/>
+                        </svg>
+                    </div>
+                    <div id="contact_address" class="col-span-10 text-gray-700 dark:text-gray-300 break-words"></div>
+                </div>
+
+                <!-- Description -->
+                <div class="grid grid-cols-12 py-3.5 px-8 items-center hover:bg-gray-50 dark:hover:bg-gray-700/40 transition">
+                    <div class="col-span-2 text-gray-400 dark:text-gray-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                            <circle cx="10" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <div id="contact_description" class="col-span-10 text-gray-700 dark:text-gray-300 break-words"></div>
+                </div>
+
+                <!-- Favorite / Rating -->
+                <div class="grid grid-cols-12 py-3.5 px-8 items-center hover:bg-gray-50 dark:hover:bg-gray-700/40 transition">
+                    <div class="col-span-2 text-gray-400 dark:text-gray-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </div>
+                    <div id="contact_favorite" class="col-span-10 flex items-center text-amber-400 gap-1"></div>
+                </div>
+
+                <!-- Website / Social Link -->
+                <div class="grid grid-cols-12 py-3.5 px-8 items-center hover:bg-gray-50 dark:hover:bg-gray-700/40 transition">
+                    <div class="col-span-2 text-gray-400 dark:text-gray-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+                        </svg>
+                    </div>
+                    <div class="col-span-10">
+                        <a id="contact_website" href="#" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline break-all"></a>
+                    </div>
+                </div>
+
+                <!-- LinkedIn -->
+                <div class="grid grid-cols-12 py-3.5 px-8 items-center hover:bg-gray-50 dark:hover:bg-gray-700/40 transition">
+                    <div class="col-span-2 text-gray-500 dark:text-gray-400">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </div>
+                    <div class="col-span-10">
+                        <a id="contact_linkdin" href="#" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline break-all"></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr class="border-gray-200 dark:border-gray-700">
+
+            <!-- Bottom Action Button (matching the Decline/Close dark button) -->
+            <div class="p-4 flex justify-center bg-gray-50/50 dark:bg-gray-800">
+                <button onclick="closeContactModal()" type="button" class="px-7 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg text-sm font-medium shadow-xs transition">
+                    Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
