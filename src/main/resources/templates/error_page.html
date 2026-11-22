@@ -1,15 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base :: parent(~{::section},~{::title})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error</title>
+    <title th:text="${title}">Error Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<section>
-    <h1>Something went wrong. Try Again!</h1>
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center p-4">
+<div class="max-w-md w-full bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center border border-gray-200 dark:border-gray-700">
+    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center rounded-full bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+    </div>
 
+    <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2" th:text="${status}">500</h1>
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2" th:text="${title}">Error</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-400 mb-6" th:text="${message}">Something unexpected happened.</p>
 
-</section>
+    <div class="flex justify-center gap-3">
+        <a th:href="@{/}" href="/" class="px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm transition-all shadow-sm">
+            Go to Home
+        </a>
+        <a th:href="@{/login}" href="/login" class="px-5 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium text-sm transition-all">
+            Back to Login
+        </a>
+    </div>
+</div>
 </body>
 </html>
