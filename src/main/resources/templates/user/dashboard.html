@@ -237,9 +237,9 @@
 <!--                                    <a th:href="'tel:' + ${c.phoneNumber}" class="text-green-600 hover:text-green-800 p-1" title="Call">-->
 <!--                                        <i class="fa-solid fa-phone"></i>-->
 <!--                                    </a>-->
-<!--                                    <a th:href="'mailto:' + ${c.email}" class="text-indigo-600 hover:text-indigo-800 p-1" title="Email">-->
-<!--                                        <i class="fa-solid fa-envelope"></i>-->
-<!--                                    </a>-->
+                                    <a th:href="'mailto:' + ${c.email}" class="text-indigo-600 hover:text-indigo-800 p-1" title="Email">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </a>
                                     <button th:data-id="${c.id}"
                                             th:onclick="loadContactData(this.getAttribute('data-id'))" class="text-blue-600 hover:text-blue-800 p-1" title="View Details">
                                         <i class="fa-solid fa-eye"></i>

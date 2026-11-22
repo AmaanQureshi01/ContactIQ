@@ -89,7 +89,10 @@
                              alt="image">
                         <div class="ps-3">
                             <div class="text-base font-semibold" th:text="${contact.name}"></div>
-                            <div class="font-normal text-body" th:text="${contact.email}"></div>
+                            <div class="font-normal text-body" >
+                                <a th:href="'mailto:' + ${contact.email}" class="text-indigo-600 hover:text-indigo-800 p-1" title="Email" th:text="${contact.email}">
+                                </a>
+                            </div>
                         </div>
                     </th>
                     <td class="px-6 py-4" th:text="${contact.phoneNumber}">
